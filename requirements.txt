@@ -4,3 +4,4 @@ fastai
 torch
 flask_cors
 ipywidgets
+voila
