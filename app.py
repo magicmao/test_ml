@@ -1,18 +1,21 @@
 from flask import Flask, request, jsonify
-from fastai.basic_train import load_learner
-from fastai.vision import open_image
+#from fastai.basic_train import load_learner
+#from fastai.vision.widgets import *
+from fastai.vision.widgets import *
+from fastai.layers import *
+from fastai.torch_core import *
 from flask_cors import CORS,cross_origin
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
 # load the learner
-learn = load_learner(path='./models', file='trained_model.pkl')
+learn = load_learner(path='./models', file='trained_model.pkl', cpu=True)
 classes = learn.data.classes
 
 
 def predict_single(img_file):
     'function to take image and return prediction'
-    prediction = learn.predict(open_image(img_file))
+    prediction = learn.predict(img_file)
     probs_list = prediction[2].numpy()
     return {
         'category': classes[prediction[1].item()],
