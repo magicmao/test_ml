@@ -1,4 +1,5 @@
 fastbook
+graphviz
 flask
 gunicorn
 fastai
